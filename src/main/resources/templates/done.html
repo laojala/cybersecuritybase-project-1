@@ -6,6 +6,10 @@
     <body>
 
         <h1>Thank you! You have been signed up to the event!</h1>
+        
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
 
     </body>
 </html>
