@@ -27,11 +27,11 @@ public class Signup extends AbstractPersistable<Long> {
         this.name = name;
     }
 
-    public String getAddress() {
+    public String getMessage() {
         return message;
     }
 
-    public void setAddress(String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 

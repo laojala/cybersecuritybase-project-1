@@ -7,6 +7,16 @@
 
         <h1>Thank you! You have been signed up to the event!</h1>
         
+        <h3>All attendees:</h3>
+        <table>
+            <th>Attendee</th>
+            <th>Message</th>
+            <tr data-th-each="signup : ${signups}">
+                <td data-th-text="${signup.name}">...</td>
+                <td data-th-text="${signup.message}">...</td>
+            </tr>
+        </table>
+        
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Logout"/>
         </form>
