@@ -9,38 +9,45 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-@Table(name = "Signup")
+//@Table(name = "Signup")
 public class Signup extends AbstractPersistable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
     private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "message")
+//    @Column(name = "name")
+    private String attendee;
+//    @Column(name = "message")
     private String message;
 
     public Signup() {
         super();
     }
 
-    public Signup(String name, String message) {
+    public Signup(String name, String message, Long id) {
         this();
-        this.name = name;
+        this.attendee = name;
         this.message = message;
+        this.id = id;
     }
+    
+//    public Signup(String name, String message) {
+//        this();
+//        this.attendee = name;
+//        this.message = message;
+//    }
 
     public Long getId() {
         return id;
     }
     
-    public String getName() {
-        return name;
+    public String getAttendee() {
+        return attendee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAttendee(String name) {
+        this.attendee = attendee;
     }
 
     public String getMessage() {
