@@ -29,15 +29,11 @@ public class Signup extends AbstractPersistable<Long> {
         this();
         this.attendee = name;
         this.message = message;
-        this.id = id;
+        if (id != null) {
+            this.id = id;
+        }
     }
     
-//    public Signup(String name, String message) {
-//        this();
-//        this.attendee = name;
-//        this.message = message;
-//    }
-
     public Long getId() {
         return id;
     }

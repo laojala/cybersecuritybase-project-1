@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Admin</title>
+    </head>
+    <body>
+
+        <h1>Admin view</h1>
+        
+        <h3>All attendees</h3>
+        <table>
+            <th>Id</th>
+            <th>Attendee</th>
+            <th>Message</th>
+            <tr data-th-each="signup : ${signups}">
+                <td data-th-text="${signup.id}">...</td>
+                <td data-th-text="${signup.attendee}">...</td>
+                <td data-th-utext="${signup.message}">...</td>
+            </tr>
+        </table>
+        
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+        
+    </body>
+</html>

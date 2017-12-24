@@ -5,6 +5,7 @@
     </head>
     <body>
 
+        <div sec:authorize="hasAuthority('ADMIN')"><a href="/admin/admin">Admin page</a></div>
         <h1>Sign up to the event using this form</h1>
 
         <form action="#" th:action="@{/form}" method="POST">

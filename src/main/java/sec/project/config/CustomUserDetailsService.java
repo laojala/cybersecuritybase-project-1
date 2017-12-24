@@ -1,6 +1,8 @@
 package sec.project.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.annotation.PostConstruct;
@@ -19,13 +21,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void init() {
         // this data would typically be retrieved from a database
         this.accountDetails = new TreeMap<>();
-        this.accountDetails.put("ted", "$2a$06$rtacOjuBuSlhnqMO2GKxW.Bs8J6KI0kYjw/gtF0bfErYgFyNTZRDm");
+        this.accountDetails.put("ted", "password");
+        this.accountDetails.put("admin", "admin");
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (!this.accountDetails.containsKey(username)) {
             throw new UsernameNotFoundException("No such user: " + username);
+        }
+        
+        List<SimpleGrantedAuthority> roles = new ArrayList<>();
+            roles.add(new SimpleGrantedAuthority("USER"));
+        if (username.equals("admin")) {
+            roles.add(new SimpleGrantedAuthority("ADMIN"));
         }
 
         return new org.springframework.security.core.userdetails.User(
@@ -35,6 +44,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("USER")));
+                roles);
     }
 }
