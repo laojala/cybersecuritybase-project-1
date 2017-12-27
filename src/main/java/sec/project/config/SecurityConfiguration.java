@@ -1,3 +1,8 @@
+/*
+ * Course project for https://cybersecuritybase.github.io/
+ * Implementation contains security flaws
+ */
+
 package sec.project.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
