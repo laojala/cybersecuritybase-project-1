@@ -71,6 +71,7 @@ public class SignupController {
             ArrayList<Signup> fromDB = new ArrayList<>();;
             connection = createConnectionAndDb();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM Signup");
+            
             while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String name = resultSet.getString("attendee");
@@ -92,10 +93,10 @@ public class SignupController {
             ResultSet resultSet;
             connection = DriverManager.getConnection(databaseAddress, "sa", "");
             RunScript.execute(connection, new FileReader("src/main/resources/schema.sql"));
-//            resultSet = connection.createStatement().executeQuery("SELECT * FROM Signup");
-//            if (resultSet.toString().isEmpty()) {
-//                RunScript.execute(connection, new FileReader("src/main/resources/import.sql"));
-//            }
+            resultSet = connection.createStatement().executeQuery("SELECT * FROM Signup");
+            if (!resultSet.first()) {
+                RunScript.execute(connection, new FileReader("src/main/resources/import.sql"));
+            }
             
         } catch (Throwable t) {
             System.err.println("ERROR3: " + t.getMessage());
