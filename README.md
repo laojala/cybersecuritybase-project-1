@@ -20,11 +20,10 @@ After login user can sign in to a event and logout. Admin user can also see list
 
 ###  Running
 
-Prerequisite is that Maven is installed. Application is run using:
+Prerequisite is that Maven is installed. Application can be run using:
 ```
 mvn spring-boot:run
 ```
-Application is located at http://localhost:8080/
 
 
 
@@ -33,7 +32,7 @@ Application is located at http://localhost:8080/
 
 ### A1 - SQL Injection:
 
-##### A1 Steps to reproduce:
+#### A1 Steps to reproduce:
 
 1. Login using admin/password or sam/salasana
 2. Fill in any input to the first field
@@ -43,7 +42,7 @@ Second'); UPDATE Signup set message='EVIL MESSAGE'; -- -
 ```
 4. **Issue:** All messages are updated to “EVIL MESSAGE”. Messages are visible at page http://localhost:8080/admin/admin
 
-##### A1 Suggested fix:
+#### A1 Suggested fix:
 
 It is recommended to use JPA’s standard methods instead of custom code for the database connection.
 
@@ -65,7 +64,7 @@ Class _SignupController_ includes suggested fixes that are currently commented o
 
 ### A6 - Sensitive Data Exposure
 
-##### A6 Steps to reproduce:
+#### A6 Steps to reproduce:
 1. Log in
 2. Fill this to a name field (message can be empty):
 ```
@@ -73,7 +72,7 @@ evil',(select username,password from Users where userid=1))-- -
 ```
 3. **Issue:** Message field of a latest signup contains username and password for the user id 1. Open page http://localhost:8080/admin/admin to view login details.
 
-##### A6 Suggested fix:
+#### A6 Suggested fix:
 
 It is recommended that route to the SQL injection is fixed similarly as in the previous issue A1. In addition, passwords should be hashed. 
 
@@ -83,7 +82,7 @@ After fix, hashed passwords need to be updated to the database for the default u
 
 ### A3 - XSS attack
 
-##### A3 Steps to reproduce:
+#### A3 Steps to reproduce:
 
 1. Login as admin user
 2. Fill in any name
@@ -94,21 +93,21 @@ After fix, hashed passwords need to be updated to the database for the default u
 4. Open admin page http://localhost:8080/admin/admin
 5. **Issue:** Page displays alert dialog
 
-##### A3 Suggested fix:
+#### A3 Suggested fix:
 
 Script becomes visible because admin view displays message as unescaped text. Fix can be done by changing `data-th-utext` to `data-th-text` in the file _admin.html_.
 
 
 ### A7 - Missing Function Level Access Control
 
-##### A7 - Steps to reproduce:
+#### A7 - Steps to reproduce:
 
 1. Login as non-admin user: sam/salasana
 2. Notice that form page does not display link to the admin page. This link is visible when admin user (admin/password) logs in.
 3. Navigate to the admin page using direct address: http://localhost:8080/admin/admin
 4. **Issue:** Basic level user has access to the admin page
 
-##### A6 - Suggested fix:
+#### A6 - Suggested fix:
 
 Class _SecurityConfiguration_ contains suggested fix, where admin user level is required to access requests in the folder admin. When fix is commented in, code looks like this:
 
@@ -132,7 +131,7 @@ It is important to notice, that authorization in the html template does not incl
 
 ### A9 - Using Components with Known Vulnerabilities
 
-##### A9 Steps to reproduce:
+#### A9 Steps to reproduce:
 
 1. Open command line and navigate to a project folder
 2. Run  OWASP Dependency Check using command 
@@ -142,6 +141,6 @@ mvn dependency-check:check
 3. Open a dependency-check report when scan is finished. Report is located in the target folder.
 4. **Issue:*** As writing this, scanner found 16 vulnerabilities and 5 vulnerable dependencies.
 
-##### A9 Suggested fix:
+#### A9 Suggested fix:
 
 Open pom.xml and update version number of a spring-boot-starter-parent to the last stable release `1.5.9.RELEASE`. Less vulnerabilities are expected when scan is re-run.
