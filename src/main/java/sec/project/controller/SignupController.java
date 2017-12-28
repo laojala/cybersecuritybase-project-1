@@ -36,7 +36,7 @@ public class SignupController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String submitForm(@RequestParam String name, @RequestParam String message, Model model) {
+    public String submitForm(@RequestParam String name, @RequestParam String message) {
         db_injection.addSignupToDb(name, message);
         //signupRepository.save(new Signup(name, message, null));
         return "done";
